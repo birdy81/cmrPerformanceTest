@@ -18,7 +18,9 @@ public class Application {
 	@Autowired
 	private TaskRegistry taskRegistry;
 
-	private ExecutorService executor = Executors.newFixedThreadPool(1);
+	private final static int THREADPOOL = 100;
+	
+	private ExecutorService executor = Executors.newFixedThreadPool(THREADPOOL);
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
@@ -26,6 +28,10 @@ public class Application {
 
 	@PostConstruct
 	public void controllerConnection() throws Exception {
-		executor.execute(new TaskExecutionWorker(taskRegistry));
+			
+		for (int i = 0; i < THREADPOOL; i++) {
+			executor.execute(new TaskExecutionWorker(taskRegistry));
+		}
+		
 	}
 }

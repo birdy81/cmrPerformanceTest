@@ -45,6 +45,5 @@ public class TaskExecutionWorker implements Runnable {
 				e.printStackTrace();
 			}
 		}
-
 	}
 }

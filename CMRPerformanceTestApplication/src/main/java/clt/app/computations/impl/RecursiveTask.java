@@ -17,13 +17,12 @@ public class RecursiveTask implements ITask {
 	@Autowired
 	private TaskRegistry taskManager;
 
-	private long executeRecursiveMethod(long n, long numberOfRuns) {
-		if (numberOfRuns >= depth) {
-
+	private long executeRecursiveMethod(long n, long numberOfRuns) {		
+		if (numberOfRuns  >= depth ) {
 			return n;
 		} else {
 			try {
-				Thread.sleep(ThreadLocalRandom.current().nextInt(1, 10 + 1));
+				Thread.sleep(ThreadLocalRandom.current().nextInt(10, 100 + 1));
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -33,7 +32,7 @@ public class RecursiveTask implements ITask {
 	}
 
 	public void setDepth(long depth) {
-		this.depth = depth;
+		this.depth = depth / 10;
 	}
 
 	@PostConstruct
@@ -42,7 +41,7 @@ public class RecursiveTask implements ITask {
 	}
 
 	@Override
-	public long execute(long n, long numberOfRuns) {
+	public long execute(long n, long numberOfRuns) {		
 		System.out.println("Recursive execution starts");
 		return executeRecursiveMethod(1, 1);
 	}
